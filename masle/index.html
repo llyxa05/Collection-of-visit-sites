@@ -1,0 +1,286 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>masle</title>
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="shortcut icon" href="favicon.ico" ; type="image/x-icon" />
+
+</head>
+
+<body style="">
+    <!-- window 1 -->
+    <div class="window ui-draggable ui-resizable" id="window-1">
+        <!-- components -->
+        <!-- handle -->
+        <img class="t handle ui-draggable-handle" src=" bar.png">
+        <!-- buttons -->
+        <div class="buttons">
+            <img class="buttons_hover_no" src=" w_buttons.png">
+            <img class="buttons_hover_yes" src=" w_button2.png">
+            <div class="button-close"></div>
+            <div class="button-minimize"></div>
+            <div class="button-maximize"></div>
+        </div>
+        <!-- header -->
+        <div class="title">masle</div>
+        <img class="title-icon" src=" folder-icon-3.png">
+        <!-- border -->
+        <img class="tt shadow" src=" w_tt.png">
+        <img class="tl shadow " src=" tl.png">
+        <img class="tr shadow " src=" tr.png">
+        <img class="l shadow " src=" l.png">
+        <img class="r shadow " src=" r.png">
+        <img class="b shadow " src=" w_b.png">
+        <img class="br shadow " src=" br.png">
+        <img class="bl shadow " src=" bl.png">
+        <!-- content area-->
+        <div class="content-area">
+            <!-- column 1 -->
+            <div class="column-1 ui-resizable">
+                <!-- column-1 folders -->
+
+                <div class="item" id="item-1-about">
+                    <img class="item-icon-folder" src=" folder-icon.png">
+                    <img class="item-arrow" src=" arrow.png">
+                    <img class="item-arrow-blue" src=" bluearrow.png">
+                    <img class="item-arrow-grey" src=" greyarrow.png">
+                    <div class="item-text">about</div>
+                </div>
+                <div class="item" id="item-1-contact">
+                    <img class="item-icon-folder" src=" folder-icon.png">
+                    <img class="item-arrow" src=" arrow.png">
+                    <img class="item-arrow-blue" src=" bluearrow.png">
+                    <img class="item-arrow-grey" src=" greyarrow.png">
+                    <div class="item-text">contact</div>
+                </div>
+                <div class="item" id="item-1-portfolio">
+                    <img class="item-icon-folder" src=" folder-icon.png">
+                    <img class="item-arrow" src=" arrow.png">
+                    <img class="item-arrow-blue" src=" bluearrow.png">
+                    <img class="item-arrow-grey" src=" greyarrow.png">
+                    <div class="item-text">portfolio</div>
+                </div>
+
+                <!-- column-2 -->
+                <div class="column-2-holder ui-resizable" style="margin-left: 20px; left: 150px;">
+                    <div class="column-2">
+                        <!-- projects folder -->
+
+                        <!-- about folders -->
+                        <div class="folder-about">
+                            <div class="item" id="about">
+                                <img class="item-icon-normal" src=" document.png">
+                                <div class="item-text-normal">about me.txt</div>
+                            </div>
+                        </div>
+                        <!-- contact folder -->
+                        <div class="folder-contact">
+                            <div class="item" id="item-2-email">
+                                <img class="item-icon-normal" src=" mail.png">
+                                <div class="item-text-normal">email</div>
+                                <div id="email-address" style="display:none;">0001masle@gmail.com</div>
+                            </div>
+
+                            <div class="item" id="item-instagram">
+                                <img class="item-icon-folder" src="insta.png">
+                                <div class="item-text">@maslexoxo</div>
+                            </div>
+
+                            <div class="item" id="item-2-youtube">
+                                <img class="item-icon-folder" src=" youtube.png">
+
+                                <div class="item-text">/c/masle1</div>
+                            </div>
+
+                            <div class="item" id="item-2-discord">
+                                <img class="item-icon-folder" src=" discord.png">
+
+                                <div class="item-text" id="discord-name">masle#5381</div>
+                            </div>
+
+                        </div>
+
+                        <div class="folder-portfolio">
+                            <div class="item item-link" data-url="https://www.youtube.com/watch?v=TgJhf0oySsk">
+                                <img class="item-icon-normal" src="youtube.png">
+                                <div class="item-text-normal">młodyBA x vkie - Pozwól że ci coś przedstawie</div>
+                                <div id="link-youtube" style="display:none;"></div>
+                            </div>
+
+                            <div class="item item-link" data-url="https://www.youtube.com/watch?v=W6vsZIeY8rE">
+                                <img class="item-icon-normal" src="youtube.png">
+                                <div class="item-text-normal">mlody korden x cygan9 - WIZJONERKA</div>
+                                <div id="link-youtube" style="display:none;"></div>
+                            </div>
+
+                            <div class="item item-link" data-url="https://www.youtube.com/watch?v=Spyi85bsvj4">
+                                <img class="item-icon-normal" src="youtube.png">
+                                <div class="item-text-normal">młodyBA - Lotka</div>
+                                <div id="link-youtube" style="display:none;"></div>
+                            </div>
+
+                            <div class="item item-link" data-url="https://www.youtube.com/watch?v=MOk7borEvt4">
+                                <img class="item-icon-normal" src="youtube.png">
+                                <div class="item-text-normal">młodyBA - CHCE ft. yJOZE</div>
+                                <div id="link-youtube" style="display:none;"></div>
+                            </div>
+
+                            <div class="item item-link" data-url="https://www.youtube.com/watch?v=0951w7srbgY">
+                                <img class="item-icon-normal" src="youtube.png">
+                                <div class="item-text-normal">MMBANDA - CZERWONE MIASTO III</div>
+                                <div id="link-youtube" style="display:none;"></div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; cursor: ew-resize;"></div>
+                    <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; cursor: ew-resize;"></div>
+                </div>
+                <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; cursor: ew-resize;"></div>
+                <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; cursor: ew-resize;"></div>
+            </div>
+
+        </div>
+        <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; cursor: ew-resize;"></div>
+        <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90; cursor: ns-resize;"></div>
+        <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"
+            style="z-index: 90; cursor: nwse-resize;"></div>
+        <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; cursor: ew-resize;"></div>
+        <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90; cursor: ns-resize;"></div>
+        <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"
+            style="z-index: 90; cursor: nwse-resize;"></div>
+    </div>
+
+
+
+
+
+
+
+    <div class="window ui-draggable ui-resizable" id="window-2">
+        <!-- components -->
+        <!-- handle -->
+        <img class="t handle ui-draggable-handle" src=" bar.png">
+        <!-- buttons -->
+        <div class="buttons">
+            <img class="buttons_hover_no" src=" w_buttons.png">
+            <img class="buttons_hover_yes" src=" w_button2.png">
+            <div class="button-close"></div>
+            <div class="button-minimize"></div>
+            <div class="button-maximize"></div>
+        </div>
+        <!-- header -->
+        <div class="title">about me.txt</div>
+        <img class="title-icon" src="document.png">
+        <!-- border -->
+        <img class="tt shadow" src=" w_tt.png">
+        <img class="tl shadow " src=" tl.png">
+        <img class="tr shadow " src=" tr.png">
+        <img class="l shadow " src=" l.png">
+        <img class="r shadow " src=" r.png">
+        <img class="b shadow " src=" w_b.png">
+        <img class="br shadow " src=" br.png">
+        <img class="bl shadow " src=" bl.png">
+        <!-- content area-->
+        <div class="content-area text-edit">
+            <pre>Hi, I'm Filip
+    I am a freelancer fascinated in video recording and editing.
+    I have been doing it as a hobby for 5 years.
+    I can edit music videos, advertisements and 
+      montages of holiday trips but I am also open for your offers.
+    If you are looking for a camera operator, I am available in 
+      Warsaw and all around Warsaw.
+    Any questions? Contact me!
+        </pre>
+        </div>
+
+        <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; cursor: ew-resize;"></div>
+        <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90; cursor: ns-resize;"></div>
+        <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"
+            style="z-index: 90; cursor: nwse-resize;"></div>
+        <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; cursor: ew-resize;"></div>
+        <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90; cursor: ns-resize;"></div>
+        <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"
+            style="z-index: 90; cursor: nwse-resize;"></div>
+    </div>
+
+
+    <div class="window ui-draggable ui-resizable" id="window-3">
+        <!-- components -->
+        <!-- handle -->
+        <img class="t handle ui-draggable-handle" src=" bar.png">
+        <!-- buttons -->
+        <div class="buttons">
+            <img class="buttons_hover_no" src=" w_buttons.png">
+            <img class="buttons_hover_yes" src=" w_button2.png">
+            <div class="button-close"></div>
+            <div class="button-minimize"></div>
+            <div class="button-maximize"></div>
+        </div>
+        <!-- header -->
+        <div class="title-2"></div>
+        <img class="title-icon" src="document.png">
+        <!-- border -->
+        <img class="tt shadow" src=" w_tt.png">
+        <img class="tl shadow " src=" tl.png">
+        <img class="tr shadow " src=" tr.png">
+        <img class="l shadow " src=" l.png">
+        <img class="r shadow " src=" r.png">
+        <img class="b shadow " src=" w_b.png">
+        <img class="br shadow " src=" br.png">
+        <img class="bl shadow " src=" bl.png">
+        <!-- content area-->
+        <div class="content-area text-edit-2">
+
+
+
+
+
+
+        </div>
+
+
+
+
+        <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; cursor: ew-resize;"></div>
+        <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90; cursor: ns-resize;"></div>
+        <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"
+            style="z-index: 90; cursor: nwse-resize;"></div>
+        <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; cursor: ew-resize;"></div>
+        <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90; cursor: ns-resize;"></div>
+        <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"
+            style="z-index: 90; cursor: nwse-resize;"></div>
+    </div>
+
+
+    <div class="folder ui-draggable-handle  ui-draggable">
+
+        <img src="folder-icon-2.png" class="folder-opener ui-draggable">
+        <div class="folder-opener-text ui-draggable">masle</div>
+
+    </div>
+
+    <div id="container" class="container">
+        <canvas width="1920" height="484"></canvas>
+    </div>
+
+
+    <script src="js/index.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/items.js"></script>
+
+
+
+
+
+</body>
+
+</html>
