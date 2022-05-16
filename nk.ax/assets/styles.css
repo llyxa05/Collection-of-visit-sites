@@ -1,0 +1,55 @@
+body {
+    margin: 0%;
+}
+
+#particles-js {
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    margin: 0%;
+}
+
+#info-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border: 4px solid darkblue;
+    background-color: rgba(0,0,0,0.7);
+    padding: 3%;
+    transform: translate(-50%, -50%);
+    color: #1ece0a;
+    font-family: 'Consolas', sans-serif;
+}
+
+a {
+    color: #00ff00;
+}
+
+h1 {
+    font-size: 31pt;
+}
+
+#listButtons {
+    display: block;
+}
+
+p {
+    margin: 3px;
+}
+
+.btnContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    border-radius: 1px;
+    border-color: #000000;
+}
+
+.authinput {
+    margin-bottom: 10px;
+    width: 100%;
+    border-radius: 2px;
+}
