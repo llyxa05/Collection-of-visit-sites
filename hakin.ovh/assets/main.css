@@ -1,0 +1,164 @@
+/*
+ *  Document   : main.css
+ *  Author     : TemaFlex
+ *  Description: The main stylesheet.
+ *
+ */
+
+/* Full Background Image */
+img.full-bg {
+    min-height: 100%;
+    min-width: 1280px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+img.full-bg.full-bg-bottom {
+    top: auto;
+    bottom: 0;
+}
+
+/* Extend with more animations */
+
+/*
+==============================================
+pulseSlow
+==============================================
+*/
+
+.animation-pulseSlow {
+    animation-name: pulseSlow;
+    -webkit-animation-name: pulseSlow;
+    animation-duration: 30s;
+    -webkit-animation-duration: 30s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -webkit-animation-timing-function: linear;
+}
+
+@keyframes pulseSlow {
+    0% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+@-webkit-keyframes pulseSlow {
+    0% {
+        -webkit-transform: scale(1.1);
+    }
+    50% {
+        -webkit-transform: scale(1);
+    }
+    100% {
+        -webkit-transform: scale(1.1);
+    }
+}
+
+/*
+==============================================
+floatingHor
+==============================================
+*/
+
+.animation-floatingHor {
+    animation-name: floatingHor;
+    -webkit-animation-name: floatingHor;
+    animation-duration: 1.5s;
+    -webkit-animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+}
+
+@keyframes floatingHor {
+    0% {
+        transform: translateX(0%);
+    }
+    50% {
+        transform: translateX(8%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@-webkit-keyframes floatingHor {
+    0% {
+        -webkit-transform: translateX(0%);
+    }
+    50% {
+        -webkit-transform: translateX(8%);
+    }
+    100% {
+        -webkit-transform: translateX(0%);
+    }
+}
+
+/*
+==============================================
+fadeInQuick
+==============================================
+*/
+
+.animation-fadeInQuick {
+    animation-name: fadeInQuick;
+    -webkit-animation-name: fadeInQuick;
+    animation-duration: 0.5s;
+    -webkit-animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    -webkit-animation-timing-function: ease-out;
+    visibility: visible !important;
+}
+
+@keyframes fadeInQuick {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeInQuick {
+    0% {
+        -webkit-transform: scale(0.9);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/*
+     FILE ARCHIVED ON 21:35:54 Mar 24, 2019 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 20:04:46 Dec 15, 2021.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 105.433
+  exclusion.robots: 0.079
+  exclusion.robots.policy: 0.073
+  RedisCDXSource: 0.48
+  esindex: 0.005
+  LoadShardBlock: 89.898 (3)
+  PetaboxLoader3.datanode: 113.5 (4)
+  CDXLines.iter: 13.455 (3)
+  load_resource: 155.651
+  PetaboxLoader3.resolve: 95.889
+*/
