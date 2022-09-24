@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="Ru">
+<head>
+	<title>loading ...</title>
+	<meta charset="UTF-8">
+	<link href="core/css/main.css" rel="stylesheet">
+	<link href="core/css/animate.css" rel="stylesheet">
+	<link rel="shortcut icon" type="image/favicon.ico" type="image/x-icon">
+	<link href="core/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="core/js/title.js"></script>
+	<script src="core/js/jquery.js"></script>
+	<script src="core/js/bootstrap.min.js"></script>
+	<script src="core/js/modernizr.custom.js"></script>
+    <script src="core/js/plugins.min.js"></script>
+    <script src="core/js/main.js"></script>
+	<link href="assets/images/eblan.png" rel="shortcut icon">
+    <style>@font-face{font-family:Pompadur;src:url(core/fonts/default/font.eot);src:local(pompadur),url(core/fonts/default/font.ttf);}h1{font-family:Pompadur,'Comic Sans MS',cursive;}</style>
+    <script> 
+	document.onkeydown = function(e) { 
+	if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 85 || e.keyCode === 117)) { // Клавиши: Alt+C, Alt+V для копирование будут недоступны. 
+	} 
+	return false; 
+	}; 
+	</script>
+
+    <script> 
+	function click() { 
+	if (event.button==2||event.button==3) { 
+	oncontextmenu='return false'; 
+	} 
+	} 
+	document.onmousedown=click 
+	document.oncontextmenu = new Function("return false;") 
+	</script>
+
+	<script>
+	function disableWheelScroll(){
+	if (document.body.addEventListener) document.body.addEventListener('DOMMouseScroll', blockWheel, false);
+	document.body.onmousewheel = blockWheel;
+	}
+	function blockWheel(event){
+	if (!event) event = window.event;
+	if (event.stopPropagation) event.stopPropagation();
+	else event.cancelBubble = true;
+	if(event.preventDefault) event.preventDefault();
+	else event.returnValue = false;
+	}
+	disableWheelScroll();
+	</script>
+</head>
+<body onmousedown="return false" onselectstart="return false">
+	<style>
+		body{overflow: hidden}
+	</style>
+	<script>
+		disableWheelScroll();
+	</script>
+	<div id="star" class="video mask overlay"></div>
+	<i class="volume-button fa fa-volume-up"></i>
+	<i class="stop-button fa fa-pause"></i>
+	<div class="video-fallback"></div>
+	<video id="video" autoplay loop>
+		<source src="core/videos/fon.mp4" type="video/mp4"/>
+		                       ⚠ ОШИБКА ⚠
+
+		Ваш браузер не поддерживает видео-скрипт. Предлагаю вам обновить ваш браузер.
+		          Рекомендую установить браузер: Google Chrome
+	</video>
+	<canvas class="cover"></canvas>
+</div>
+<div class="pageoverlay">
+<div class="lightbox">
+<div class="awrapper">
+<div class="titles fadeInDown">
+	<h1>foa</font><font color="Red">mmy</font></h1>
+			<div class="social-media-links">
+				<a href="//////////////////////////////////////////////////////////////////////////" target="_blank" onclick="window.open('https://t.me/foammys');"><img alt="Telegram" class="social-media" height="32" src="images/telegram.svg" width="32"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				<a href="//////////////////////////////////////////////////////////////////////////" target="_blank" onclick="window.open('https://vk.com/foammy');"><img alt="VK" class="social-media" height="32" src="images/vk.svg" width="32"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				<a href="//////////////////////////////////////////////////////////////////////////" target="_blank" onclick="window.open('https://github.com/ovhxakin');"><img alt="Github" class="social-media" height="32" src="images/github.svg" width="32"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				<a href="//////////////////////////////////////////////////////////////////////////" onclick="window.open('https://foammy.pw/donate');"><img alt="Donate" class="social-media" height="32" src="images/donate.svg" width="32"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				<a href="//////////////////////////////////////////////////////////////////////////" target="_blank" onclick="window.open('https://foammy.pw/cloud');"><img alt="CLOUD" class="social-media" height="32" src="assets/images/cloud.png" width="32"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    <a href="//////////////////////////////////////////////////////////////////////////" target="_blank" onclick="window.open('https://status.foammy.pw');"><img alt="STATUS" class="social-media" height="32" src="assets/images/status.png" width="32"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="//////////////////////////////////////////////////////////////////////////" target="_blank" onclick="https://blog.foammy.pw"><img alt="BLOG" class="social-media" height="32" src="assets/images/blog.png" width="32">
+			</div>
+			</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

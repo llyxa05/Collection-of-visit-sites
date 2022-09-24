@@ -1,0 +1,491 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Russian Botnet</title>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
+<!-- For whatever reason, the .css file was being loaded as an octet-stream in firefox, so I declare this deterministically -->
+<style>
+	* {
+		font-family: 'Courier New', monospace;
+	}
+	
+	body {
+		font-size: 12px;
+		background-color: black;
+		color: white;
+		margin: 0;
+	}
+	
+	a {
+		color: white;
+		text-decoration: none;
+		line-height: 20px;
+	}
+	
+	a:hover,
+	a:active {
+		color: #868686;
+		text-decoration: underline;
+	}
+
+	div {
+		width: auto;
+		height: auto;
+		float: left;
+		padding: 10px;
+		border: 1px solid white;
+		margin: 50px;
+		position: absolute;
+		left: 0;
+		right: 0;
+	}
+
+	.logo,
+	.logo:hover,
+	.logo:active {
+		line-height: 10px;
+		text-decoration: none;
+	}
+</style>
+</head>
+<body>
+<pre><center><a href="index.html" class="logo">
+                               .x+=:.      .x+=:.      .                                        
+                              z`    ^%    z`    ^%    @88>                                      
+   .u    .      x.    .          .   &lt;k      .   &lt;k   %8P                  u.    u.             
+ .d88B :@8c   .@88k  z88u      .@8Ned8"    .@8Ned8"    .          u      x@88k u@88c.           
+="8888f8888r ~"8888 ^8888    .@^%8888"   .@^%8888"   .@88u     us888u.  ^"8888""8888"           
+  4888>'88"    8888  888R   x88:  `)8b. x88:  `)8b. ''888E` .@88 "8888"   8888  888R            
+  4888> '      8888  888R   8888N=*8888 8888N=*8888   888E  9888  9888    8888  888R            
+  4888>        8888  888R    %8"    R88  %8"    R88   888E  9888  9888    8888  888R            
+ .d888L .+     8888 ,888B .   @8Wou 9%    @8Wou 9%    888E  9888  9888    8888  888R            
+ ^"8888*"     "8888Y 8888"  .888888P`   .888888P`     888&  9888  9888   "*88*" 8888"           
+    "Y"        `Y"   'YP    `   ^"F     `   ^"F       R888" "888*""888"    ""   'Y"             
+                                                       ""    ^Y"   ^Y'                          
+                      ..                     s                                  s                               
+                . uW8"                      :8                                 :8                               
+                `t888              u.      .88       u.    u.                 .88                               
+                 8888   .    ...ue888b    :888ooo  x@88k u@88c.      .u      :888ooo                            
+                 9888.z88N   888R Y888r -*8888888 ^"8888""8888"   ud8888.  -*8888888                            
+                 9888  888E  888R I888>   8888      8888  888R  :888'8888.   8888                               
+                 9888  888E  888R I888>   8888      8888  888R  d888 '88%"   8888                               
+                 9888  888E  888R I888>   8888      8888  888R  8888.+"      8888                               
+                 9888  888E u8888cJ888   .8888Lu=   8888  888R  8888L       .8888Lu=                            
+                .8888  888"  "*888*P"    ^%888*    "*88*" 8888" '8888c. .+  ^%888*                              
+                 `%888*%"      'Y"         'Y"       ""   'Y"    "88888%      'Y"                               
+                    "`                                             "YP'                                         
+</pre></center></a>
+<div class="files">
+	<a href="files/learning/04-machine-level-programming-basics.pdf">04-machine-level-programming-basics.pdf</a><br>
+	<a href="files/learning/3k_dorks_shopping_by_rusev_-_hack-ar.com.txt">3k_dorks_shopping_by_rusev_-_hack-ar.com.txt</a><br>
+	<a href="files/learning/459_-_free_energy_from_the_earth.pdf">459_-_free_energy_from_the_earth.pdf</a><br>
+	<a href="files/learning/4a-esp8266__at_instruction_set__en_v1.5.3.pdf">4a-esp8266__at_instruction_set__en_v1.5.3.pdf</a><br>
+	<a href="files/learning/a_buffer_overflow_study-attacks_and_defenses_2002.pdf">a_buffer_overflow_study-attacks_and_defenses_2002.pdf</a><br>
+	<a href="files/learning/a_bug_hunters_diary_2011.pdf">a_bug_hunters_diary_2011.pdf</a><br>
+	<a href="files/learning/access_denied-code_breakers_guide.pdf">access_denied-code_breakers_guide.pdf</a><br>
+	<a href="files/learning/advanced-linux-programming.pdf">advanced-linux-programming.pdf</a><br>
+	<a href="files/learning/advanced_penetration_testing_for_highly-secured_environments.pdf">advanced_penetration_testing_for_highly-secured_environments.pdf</a><br>
+	<a href="files/learning/advanced_polymorphic_techniques.pdf">advanced_polymorphic_techniques.pdf</a><br>
+	<a href="files/learning/advanced_programming_in_the_unix_envinronment_2013.pdf">advanced_programming_in_the_unix_envinronment_2013.pdf</a><br>
+	<a href="files/learning/a_guide_to_kernel_exploitation-attacking_the_core.pdf">a_guide_to_kernel_exploitation-attacking_the_core.pdf</a><br>
+	<a href="files/learning/airbeam_reference_guide.pdf">airbeam_reference_guide.pdf</a><br>
+	<a href="files/learning/alias_analysis_for_assembly_2006.pdf">alias_analysis_for_assembly_2006.pdf</a><br>
+	<a href="files/learning/a_methodology_to_detect_and_characterize_kernel_level_rootkit_exploits_involving_redirection_of_the_.pdf">a_methodology_to_detect_and_characterize_kernel_level_rootkit_exploits_involving_redirection_of_the_.pdf</a><br>
+	<a href="files/learning/analog_computer_manual.pdf">analog_computer_manual.pdf</a><br>
+	<a href="files/learning/analyzing-malicious-document-files.pdf">analyzing-malicious-document-files.pdf</a><br>
+	<a href="files/learning/anarchy-in-money_v2.0.pdf">anarchy-in-money_v2.0.pdf</a><br>
+	<a href="files/learning/an_introduction_to_security.pdf">an_introduction_to_security.pdf</a><br>
+	<a href="files/learning/anti-forensics_the_rootkit_connection.pdf">anti-forensics_the_rootkit_connection.pdf</a><br>
+	<a href="files/learning/an_undetectable_computer_virus.pdf">an_undetectable_computer_virus.pdf</a><br>
+	<a href="files/learning/arduino_robotic_projects.pdf">arduino_robotic_projects.pdf</a><br>
+	<a href="files/learning/arm_asm_examples-from-ut.pdf">arm_asm_examples-from-ut.pdf</a><br>
+	<a href="files/learning/armcortex_faults.pdf">armcortex_faults.pdf</a><br>
+	<a href="files/learning/arm_cortex_m4_programming_arch.pdf">arm_cortex_m4_programming_arch.pdf</a><br>
+	<a href="files/learning/arm-education-catalogue.pdf">arm-education-catalogue.pdf</a><br>
+	<a href="files/learning/arm_instruction_set_slides.pdf">arm_instruction_set_slides.pdf</a><br>
+	<a href="files/learning/arm_quick_reference.pdf">arm_quick_reference.pdf</a><br>
+	<a href="files/learning/armv6-m_architecture_reference_manual.pdf">armv6-m_architecture_reference_manual.pdf</a><br>
+	<a href="files/learning/armv7-m_architecture_reference_manual.pdf">armv7-m_architecture_reference_manual.pdf</a><br>
+	<a href="files/learning/armv7-m_instruction_set.pdf">armv7-m_instruction_set.pdf</a><br>
+	<a href="files/learning/art_of_intel_assembly_language.pdf">art_of_intel_assembly_language.pdf</a><br>
+	<a href="files/learning/aslr-address_space_layout_randomization.pdf">aslr-address_space_layout_randomization.pdf</a><br>
+	<a href="files/learning/aslr_smackand_laugh_reference.pdf">aslr_smackand_laugh_reference.pdf</a><br>
+	<a href="files/learning/atmel_8bit_avr_instruction_set_manual.pdf">atmel_8bit_avr_instruction_set_manual.pdf</a><br>
+	<a href="files/learning/attacking_network_protocols.pdf">attacking_network_protocols.pdf</a><br>
+	<a href="files/learning/att_raven_xe_userguide.pdf">att_raven_xe_userguide.pdf</a><br>
+	<a href="files/learning/automated_defense_from_rootkit_attacks.pdf">automated_defense_from_rootkit_attacks.pdf</a><br>
+	<a href="files/learning/automated_malware_invariant_generation.pdf">automated_malware_invariant_generation.pdf</a><br>
+	<a href="files/learning/automatically_generating_signatures_for_polymorphic_worms.pdf">automatically_generating_signatures_for_polymorphic_worms.pdf</a><br>
+	<a href="files/learning/auto-sign_an_automatic_signature_generator_for_high-speed_malware_filtering_devices.pdf">auto-sign_an_automatic_signature_generator_for_high-speed_malware_filtering_devices.pdf</a><br>
+	<a href="files/learning/avoiding_windows_rootkit_detection.pdf">avoiding_windows_rootkit_detection.pdf</a><br>
+	<a href="files/learning/aws_administration-the_definitive_guide_2016.pdf">aws_administration-the_definitive_guide_2016.pdf</a><br>
+	<a href="files/learning/awssystemadministration.pdf">awssystemadministration.pdf</a><br>
+	<a href="files/learning/barbed_wire_networks_r2.pdf">barbed_wire_networks_r2.pdf</a><br>
+	<a href="files/learning/barcode_reference_en.pdf">barcode_reference_en.pdf</a><br>
+	<a href="files/learning/bash_beginners_guide.pdf">bash_beginners_guide.pdf</a><br>
+	<a href="files/learning/basic_reverse_engineering-immunity_debugger.pdf">basic_reverse_engineering-immunity_debugger.pdf</a><br>
+	<a href="files/learning/Beginning-NFC-Near-Field-Communication-with-Arduino-Android-and-PhoneGap-2014.pdf">Beginning-NFC-Near-Field-Communication-with-Arduino-Android-and-PhoneGap-2014.pdf</a><br>
+	<a href="files/learning/beginning_nfc.pdf">beginning_nfc.pdf</a><br>
+	<a href="files/learning/beginning_the_linux_command_line.pdf">beginning_the_linux_command_line.pdf</a><br>
+	<a href="files/learning/billgatliff-toolchains.pdf">billgatliff-toolchains.pdf</a><br>
+	<a href="files/learning/binary_code_disassembly_for_re.pdf">binary_code_disassembly_for_re.pdf</a><br>
+	<a href="files/learning/bitcoin_for_the_befuddled.pdf">bitcoin_for_the_befuddled.pdf</a><br>
+	<a href="files/learning/blackhatonomics.pdf">blackhatonomics.pdf</a><br>
+	<a href="files/learning/blind_sql_injection_automation.pdf">blind_sql_injection_automation.pdf</a><br>
+	<a href="files/learning/botnet_detection_-_countering_the_largest_security_threat_-_springer_-_nov_07.pdf">botnet_detection_-_countering_the_largest_security_threat_-_springer_-_nov_07.pdf</a><br>
+	<a href="files/learning/botnets-the_killer_web_app(1).pdf">botnets-the_killer_web_app(1).pdf</a><br>
+	<a href="files/learning/botnets-the_killer_web_app.pdf">botnets-the_killer_web_app.pdf</a><br>
+	<a href="files/learning/brassring-ckeditor_user_guide.pdf">brassring-ckeditor_user_guide.pdf</a><br>
+	<a href="files/learning/breaking_into_computer_networks_from_the_internet.pdf">breaking_into_computer_networks_from_the_internet.pdf</a><br>
+	<a href="files/learning/bsd_rootkit_e34ea_eaa14a1.pdf">bsd_rootkit_e34ea_eaa14a1.pdf</a><br>
+	<a href="files/learning/buffer_overflow_and_memory_attacks.pdf">buffer_overflow_and_memory_attacks.pdf</a><br>
+	<a href="files/learning/building_slack_bots.pdf">building_slack_bots.pdf</a><br>
+	<a href="files/learning/building_virtual_pentesting_labs_for_advanced_pentesting.pdf">building_virtual_pentesting_labs_for_advanced_pentesting.pdf</a><br>
+	<a href="files/learning/build_your_own_botnet.pdf">build_your_own_botnet.pdf</a><br>
+	<a href="files/learning/burp_suite_starter.pdf">burp_suite_starter.pdf</a><br>
+	<a href="files/learning/bypassing_dep_with_wpm_and_rop.pdf">bypassing_dep_with_wpm_and_rop.pdf</a><br>
+	<a href="files/learning/cabling-the_complete_guide_to_network_wiring_3rd_ed.pdf">cabling-the_complete_guide_to_network_wiring_3rd_ed.pdf</a><br>
+	<a href="files/learning/cassandra_high_performance_cookbook.pdf">cassandra_high_performance_cookbook.pdf</a><br>
+	<a href="files/learning/cassandra_the_definitive_guide.pdf">cassandra_the_definitive_guide.pdf</a><br>
+	<a href="files/learning/ccna_exam_certification_guide.pdf">ccna_exam_certification_guide.pdf</a><br>
+	<a href="files/learning/cehv9_certified_ethical_hacker_v9_study_guide.pdf">cehv9_certified_ethical_hacker_v9_study_guide.pdf</a><br>
+	<a href="files/learning/certified_ethical_hacker_exam_guide_3rd_ed.pdf">certified_ethical_hacker_exam_guide_3rd_ed.pdf</a><br>
+	<a href="files/learning/chapter02-runtimeattacks.pdf">chapter02-runtimeattacks.pdf</a><br>
+	<a href="files/learning/chw00t_how_to_break_out_from_various_chroot_solutions-bucsay_balazs.pdf">chw00t_how_to_break_out_from_various_chroot_solutions-bucsay_balazs.pdf</a><br>
+	<a href="files/learning/cia-brainwashing-records-1950s.pdf">cia-brainwashing-records-1950s.pdf</a><br>
+	<a href="files/learning/cis_distribution_independent_linux_benchmark_v1.1.0.pdf">cis_distribution_independent_linux_benchmark_v1.1.0.pdf</a><br>
+	<a href="files/learning/cis_docker_community_edition_benchmark_v1.1.0.pdf">cis_docker_community_edition_benchmark_v1.1.0.pdf</a><br>
+	<a href="files/learning/cissp-all-in-one-exam-guide-6th-edition.pdf">cissp-all-in-one-exam-guide-6th-edition.pdf</a><br>
+	<a href="files/learning/cis_ubuntu_linux_16.04_lts_benchmark_v1.1.0.pdf">cis_ubuntu_linux_16.04_lts_benchmark_v1.1.0.pdf</a><br>
+	<a href="files/learning/cloudfoundry_thedefinitiveguide.pdf">cloudfoundry_thedefinitiveguide.pdf</a><br>
+	<a href="files/learning/cloudnativeinfrastructure.pdf">cloudnativeinfrastructure.pdf</a><br>
+	<a href="files/learning/cms_security_handbook_2011.pdf">cms_security_handbook_2011.pdf</a><br>
+	<a href="files/learning/coding_for_penetration_testers.pdf">coding_for_penetration_testers.pdf</a><br>
+	<a href="files/learning/collaborative_defense_against_zero-day_and_polymorphic_worms_detection_response_and_an_evaluation_fr.pdf">collaborative_defense_against_zero-day_and_polymorphic_worms_detection_response_and_an_evaluation_fr.pdf</a><br>
+	<a href="files/learning/comptiasecuritypluscertificationguide_ebook.pdf">comptiasecuritypluscertificationguide_ebook.pdf</a><br>
+	<a href="files/learning/computer_networking_a_top_down_approach.pdf">computer_networking_a_top_down_approach.pdf</a><br>
+	<a href="files/learning/computer_networking-principals_protocols_practice.pdf">computer_networking-principals_protocols_practice.pdf</a><br>
+	<a href="files/learning/computer_virus_response_using_autonomous_agent_technology.pdf">computer_virus_response_using_autonomous_agent_technology.pdf</a><br>
+	<a href="files/learning/concepts_for_the_stealth_windows_rootkit_the_chameleon_project.pdf">concepts_for_the_stealth_windows_rootkit_the_chameleon_project.pdf</a><br>
+	<a href="files/learning/concise_ctf_cheatsheet.pdf">concise_ctf_cheatsheet.pdf</a><br>
+	<a href="files/learning/containers_virtualization_umass.pdf">containers_virtualization_umass.pdf</a><br>
+	<a href="files/learning/corelan_exploit_dev_10-chaining_depwithrop.pdf">corelan_exploit_dev_10-chaining_depwithrop.pdf</a><br>
+	<a href="files/learning/corelan_exploit_dev_11-heap-spraying-demystified.pdf">corelan_exploit_dev_11-heap-spraying-demystified.pdf</a><br>
+	<a href="files/learning/corelan_exploit_dev_1-stack_based_overflows.pdf">corelan_exploit_dev_1-stack_based_overflows.pdf</a><br>
+	<a href="files/learning/corelan_exploit_dev_3-writing_seh_basedexploits-a.pdf">corelan_exploit_dev_3-writing_seh_basedexploits-a.pdf</a><br>
+	<a href="files/learning/corelan_exploit_dev_3-writing_seh_basedexploits-b.pdf">corelan_exploit_dev_3-writing_seh_basedexploits-b.pdf</a><br>
+	<a href="files/learning/corelan_exploit_dev_4-fromexploit_to_metasploit_basics.pdf">corelan_exploit_dev_4-fromexploit_to_metasploit_basics.pdf</a><br>
+	<a href="files/learning/corelan_exploit_dev_5-debugger_modules.pdf">corelan_exploit_dev_5-debugger_modules.pdf</a><br>
+	<a href="files/learning/corelan_exploit_dev_6-bypassing_stackcookies.pdf">corelan_exploit_dev_6-bypassing_stackcookies.pdf</a><br>
+	<a href="files/learning/corelan_exploit_dev_7-unicode.pdf">corelan_exploit_dev_7-unicode.pdf</a><br>
+	<a href="files/learning/corelan_exploit_dev_8-win32_egg_hunting.pdf">corelan_exploit_dev_8-win32_egg_hunting.pdf</a><br>
+	<a href="files/learning/corelan_exploit_dev_9-win32_shellcoding.pdf">corelan_exploit_dev_9-win32_shellcoding.pdf</a><br>
+	<a href="files/learning/corporate_computer_security_3rd_ed.pdf">corporate_computer_security_3rd_ed.pdf</a><br>
+	<a href="files/learning/covert_surveillance_and_property_interference.pdf">covert_surveillance_and_property_interference.pdf</a><br>
+	<a href="files/learning/cpu_design-complete_computer_hobbyist.pdf">cpu_design-complete_computer_hobbyist.pdf</a><br>
+	<a href="files/learning/cracking_drupal-a_drop_in_the_bucket_2009.pdf">cracking_drupal-a_drop_in_the_bucket_2009.pdf</a><br>
+	<a href="files/learning/create_your_own_router_-_titan_wiki_2018-06-05.pdf">create_your_own_router_-_titan_wiki_2018-06-05.pdf</a><br>
+	<a href="files/learning/crestron_programming_guide.pdf">crestron_programming_guide.pdf</a><br>
+	<a href="files/learning/cybersecurity_attackanddefensestrategies_ebook.pdf">cybersecurity_attackanddefensestrategies_ebook.pdf</a><br>
+	<a href="files/learning/cyber_warfare-2nd_ed.pdf">cyber_warfare-2nd_ed.pdf</a><br>
+	<a href="files/learning/databasereliabilityengineering.pdf">databasereliabilityengineering.pdf</a><br>
+	<a href="files/learning/de0-nano-soc_user_manual_rev.c1.pdf">de0-nano-soc_user_manual_rev.c1.pdf</a><br>
+	<a href="files/learning/debugging_with_gdb.pdf">debugging_with_gdb.pdf</a><br>
+	<a href="files/learning/dec_clinical_lab12_input_programs.pdf">dec_clinical_lab12_input_programs.pdf</a><br>
+	<a href="files/learning/defcon-22_shellcodes-for-arm-updated.pdf">defcon-22_shellcodes-for-arm-updated.pdf</a><br>
+	<a href="files/learning/defeating_dep_and_aslr.pdf">defeating_dep_and_aslr.pdf</a><br>
+	<a href="files/learning/demonsaw_4_-_create_your_own_router_-_titan_wiki_2017-12-20.pdf">demonsaw_4_-_create_your_own_router_-_titan_wiki_2017-12-20.pdf</a><br>
+	<a href="files/learning/demonsaw_tech_overview.pdf">demonsaw_tech_overview.pdf</a><br>
+	<a href="files/learning/depindepth.pdf">depindepth.pdf</a><br>
+	<a href="files/learning/deployingtoopenshift.pdf">deployingtoopenshift.pdf</a><br>
+	<a href="files/learning/designingdistributedsystems.pdf">designingdistributedsystems.pdf</a><br>
+	<a href="files/learning/detecting_and_exploiting_integer_overflows.pdf">detecting_and_exploiting_integer_overflows.pdf</a><br>
+	<a href="files/learning/detection_of_metamorphic_and_virtualization-based_malware_using_algebraic_specification_001.pdf">detection_of_metamorphic_and_virtualization-based_malware_using_algebraic_specification_001.pdf</a><br>
+	<a href="files/learning/developpement_avance_d_un_rootkit_pour_les_modules_du_noyau.pdf">developpement_avance_d_un_rootkit_pour_les_modules_du_noyau.pdf</a><br>
+	<a href="files/learning/devops_automation_cookbook.pdf">devops_automation_cookbook.pdf</a><br>
+	<a href="files/learning/digitalforensicsandincidentresponse_ebook.pdf">digitalforensicsandincidentresponse_ebook.pdf</a><br>
+	<a href="files/learning/discorduriexploitation.pdf">discorduriexploitation.pdf</a><br>
+	<a href="files/learning/disk-level_behavioral_malware_detection.pdf">disk-level_behavioral_malware_detection.pdf</a><br>
+	<a href="files/learning/dissecting_the_hack-the_f0rb1dd3n_network.pdf">dissecting_the_hack-the_f0rb1dd3n_network.pdf</a><br>
+	<a href="files/learning/duqu_ics_malware_report.pdf">duqu_ics_malware_report.pdf</a><br>
+	<a href="files/learning/effectivedevops.pdf">effectivedevops.pdf</a><br>
+	<a href="files/learning/elf_for_arm.pdf">elf_for_arm.pdf</a><br>
+	<a href="files/learning/elf_format_specification.pdf">elf_format_specification.pdf</a><br>
+	<a href="files/learning/escalating_privileges_with_wsl.pdf">escalating_privileges_with_wsl.pdf</a><br>
+	<a href="files/learning/esp8266_esp32.pdf">esp8266_esp32.pdf</a><br>
+	<a href="files/learning/ethical_hacking_and_countermeasures-web_applications_and_data_servers.pdf">ethical_hacking_and_countermeasures-web_applications_and_data_servers.pdf</a><br>
+	<a href="files/learning/ethical_hacking_and_penetration_testing_guide.pdf">ethical_hacking_and_penetration_testing_guide.pdf</a><br>
+	<a href="files/learning/ets-terminal-ingenico-isc250-installation-and-configuration-guide.pdf">ets-terminal-ingenico-isc250-installation-and-configuration-guide.pdf</a><br>
+	<a href="files/learning/evaluation_of_malware_phylogeny_modelling_systems_using_automated_variant_generation.pdf">evaluation_of_malware_phylogeny_modelling_systems_using_automated_variant_generation.pdf</a><br>
+	<a href="files/learning/exploiting_format_string_vulnerabilities.pdf">exploiting_format_string_vulnerabilities.pdf</a><br>
+	<a href="files/learning/exploiting_stack_overflows_in_the_linux_kernel.pdf">exploiting_stack_overflows_in_the_linux_kernel.pdf</a><br>
+	<a href="files/learning/extractingdatafromnosqldbs.pdf">extractingdatafromnosqldbs.pdf</a><br>
+	<a href="files/learning/fallout_protection_what_to_know_and_do.pdf">fallout_protection_what_to_know_and_do.pdf</a><br>
+	<a href="files/learning/fernvale-31c3.pdf">fernvale-31c3.pdf</a><br>
+	<a href="files/learning/fight_against_1-days.pdf">fight_against_1-days.pdf</a><br>
+	<a href="files/learning/finding_lfi_and_rfi.pdf">finding_lfi_and_rfi.pdf</a><br>
+	<a href="files/learning/firmware_security_testing_methodology_version.1.pdf">firmware_security_testing_methodology_version.1.pdf</a><br>
+	<a href="files/learning/floathub_communications_protocol_0.38.pdf">floathub_communications_protocol_0.38.pdf</a><br>
+	<a href="files/learning/formatstringattacks-espanol.pdf">formatstringattacks-espanol.pdf</a><br>
+	<a href="files/learning/format_string_attacks-guardent.pdf">format_string_attacks-guardent.pdf</a><br>
+	<a href="files/learning/fraser1982_machine_independent_linker.pdf">fraser1982_machine_independent_linker.pdf</a><br>
+	<a href="files/learning/furby_source_code.pdf">furby_source_code.pdf</a><br>
+	<a href="files/learning/game_hacking.pdf">game_hacking.pdf</a><br>
+	<a href="files/learning/getting_started_with_raspberry_pi_zero.pdf">getting_started_with_raspberry_pi_zero.pdf</a><br>
+	<a href="files/learning/git_version_control_for_everyone.pdf">git_version_control_for_everyone.pdf</a><br>
+	<a href="files/learning/gray_hat_hacking-the_ethical_hacker_handbook_3r_edition.pdf">gray_hat_hacking-the_ethical_hacker_handbook_3r_edition.pdf</a><br>
+	<a href="files/learning/hacker_techniques_tools_and_incident_handling.pdf">hacker_techniques_tools_and_incident_handling.pdf</a><br>
+	<a href="files/learning/hacking_activemq_based_jms_applications.pdf">hacking_activemq_based_jms_applications.pdf</a><br>
+	<a href="files/learning/hacking_asp_dotnet_applications.pdf">hacking_asp_dotnet_applications.pdf</a><br>
+	<a href="files/learning/hacking_exposed-linux_third_ed.pdf">hacking_exposed-linux_third_ed.pdf</a><br>
+	<a href="files/learning/hacking_exposed_malware_and_rootkits.pdf">hacking_exposed_malware_and_rootkits.pdf</a><br>
+	<a href="files/learning/hacking_exposed-network_security_secrets_7.pdf">hacking_exposed-network_security_secrets_7.pdf</a><br>
+	<a href="files/learning/hacking_exposed-web_apps_3rd_ed.pdf">hacking_exposed-web_apps_3rd_ed.pdf</a><br>
+	<a href="files/learning/hacking_point_of_sale_payment_applications.pdf">hacking_point_of_sale_payment_applications.pdf</a><br>
+	<a href="files/learning/hacking-the_art_of_exploitation_2nd_edition.pdf">hacking-the_art_of_exploitation_2nd_edition.pdf</a><br>
+	<a href="files/learning/hacking_the_future_-_privacy_identity_and_anonymity_on_the_web.pdf">hacking_the_future_-_privacy_identity_and_anonymity_on_the_web.pdf</a><br>
+	<a href="files/learning/hacking_the_human.pdf">hacking_the_human.pdf</a><br>
+	<a href="files/learning/hacking_webapps-syngress2012.pdf">hacking_webapps-syngress2012.pdf</a><br>
+	<a href="files/learning/hack_proofing_your_network.pdf">hack_proofing_your_network.pdf</a><br>
+	<a href="files/learning/hadoop_security_design.pdf">hadoop_security_design.pdf</a><br>
+	<a href="files/learning/hakin9-open-source-tools.pdf">hakin9-open-source-tools.pdf</a><br>
+	<a href="files/learning/handout-x86-cheat-sheet.pdf">handout-x86-cheat-sheet.pdf</a><br>
+	<a href="files/learning/hands-oncybersecurityforarchitects_ebook.pdf">hands-oncybersecurityforarchitects_ebook.pdf</a><br>
+	<a href="files/learning/hands-on_ethical_hacking_and_network_defense_2nd_ed.pdf">hands-on_ethical_hacking_and_network_defense_2nd_ed.pdf</a><br>
+	<a href="files/learning/home_lab_build.pdf">home_lab_build.pdf</a><br>
+	<a href="files/learning/horsepill_linux_rootkit.pdf">horsepill_linux_rootkit.pdf</a><br>
+	<a href="files/learning/how_linux_works.pdf">how_linux_works.pdf</a><br>
+	<a href="files/learning/incident_response_and_computer_forensics_3rd_ed.pdf">incident_response_and_computer_forensics_3rd_ed.pdf</a><br>
+	<a href="files/learning/industrialcybersecurity_ebook.pdf">industrialcybersecurity_ebook.pdf</a><br>
+	<a href="files/learning/in_memory_shellcode_injection_userland.pdf">in_memory_shellcode_injection_userland.pdf</a><br>
+	<a href="files/learning/intel32-1-basic_architecture.pdf">intel32-1-basic_architecture.pdf</a><br>
+	<a href="files/learning/intel32-2-instruction_set_referencea.pdf">intel32-2-instruction_set_referencea.pdf</a><br>
+	<a href="files/learning/intel32-2-instruction_set_referneceb.pdf">intel32-2-instruction_set_referneceb.pdf</a><br>
+	<a href="files/learning/intel32-3-system_programming_guide.pdf">intel32-3-system_programming_guide.pdf</a><br>
+	<a href="files/learning/intelsoftwaredevelopersmanual1-4.pdf">intelsoftwaredevelopersmanual1-4.pdf</a><br>
+	<a href="files/learning/intel-software-developers-manual-vol2.pdf">intel-software-developers-manual-vol2.pdf</a><br>
+	<a href="files/learning/internetworking_technology_handbook.pdf">internetworking_technology_handbook.pdf</a><br>
+	<a href="files/learning/intoxalox_manual.pdf">intoxalox_manual.pdf</a><br>
+	<a href="files/learning/introduccion_explotacion_software_linux_espanol.pdf">introduccion_explotacion_software_linux_espanol.pdf</a><br>
+	<a href="files/learning/iot_rce_attacks.pdf">iot_rce_attacks.pdf</a><br>
+	<a href="files/learning/jackhammer.pdf">jackhammer.pdf</a><br>
+	<a href="files/learning/java_deserialization_attacks.pdf">java_deserialization_attacks.pdf</a><br>
+	<a href="files/learning/jenkins2_upandrunning.pdf">jenkins2_upandrunning.pdf</a><br>
+	<a href="files/learning/kalilinux_anethicalhackerscookbook_ebook.pdf">kalilinux_anethicalhackerscookbook_ebook.pdf</a><br>
+	<a href="files/learning/kali-linux-revealed-1st-edition.pdf">kali-linux-revealed-1st-edition.pdf</a><br>
+	<a href="files/learning/kubernetes_upandrunning.pdf">kubernetes_upandrunning.pdf</a><br>
+	<a href="files/learning/latex_beginners_guide.pdf">latex_beginners_guide.pdf</a><br>
+	<a href="files/learning/learning_docker.pdf">learning_docker.pdf</a><br>
+	<a href="files/learning/learningmalwareanalysis_ebook.pdf">learningmalwareanalysis_ebook.pdf</a><br>
+	<a href="files/learning/learning_radare_in_practice.pdf">learning_radare_in_practice.pdf</a><br>
+	<a href="files/learning/lfs-book-8.1.pdf">lfs-book-8.1.pdf</a><br>
+	<a href="files/learning/lifting_the_veil-_an_investigative_history_of_the_united_states_pathocracy_version_1.0.0.pdf">lifting_the_veil-_an_investigative_history_of_the_united_states_pathocracy_version_1.0.0.pdf</a><br>
+	<a href="files/learning/linux_binary_analysis.pdf">linux_binary_analysis.pdf</a><br>
+	<a href="files/learning/linux_exploit_dev_1-stack_overflow.pdf">linux_exploit_dev_1-stack_overflow.pdf</a><br>
+	<a href="files/learning/linux_exploit_dev_2-stack_overflow_aslr_bypass_using_ret2reg.pdf">linux_exploit_dev_2-stack_overflow_aslr_bypass_using_ret2reg.pdf</a><br>
+	<a href="files/learning/linux_exploit_dev_3-ret2libc.pdf">linux_exploit_dev_3-ret2libc.pdf</a><br>
+	<a href="files/learning/linux_exploit_dev_4a-real_app_demo.pdf">linux_exploit_dev_4a-real_app_demo.pdf</a><br>
+	<a href="files/learning/linux_exploit_dev_4-ascii_armor_and_re2plt.pdf">linux_exploit_dev_4-ascii_armor_and_re2plt.pdf</a><br>
+	<a href="files/learning/linux_exploit_dev_4b-real_app_demo_part2.pdf">linux_exploit_dev_4b-real_app_demo_part2.pdf</a><br>
+	<a href="files/learning/linux_kernel_development_3ed.pdf">linux_kernel_development_3ed.pdf</a><br>
+	<a href="files/learning/linux_kernel_networking_implementation_and_theory.pdf">linux_kernel_networking_implementation_and_theory.pdf</a><br>
+	<a href="files/learning/linuxpocketguide_3rdedition.pdf">linuxpocketguide_3rdedition.pdf</a><br>
+	<a href="files/learning/linux_standard_base_core-generic.pdf">linux_standard_base_core-generic.pdf</a><br>
+	<a href="files/learning/little_black_book_of_scams_australian_gvt.pdf">little_black_book_of_scams_australian_gvt.pdf</a><br>
+	<a href="files/learning/loopix_anonymity_system.pdf">loopix_anonymity_system.pdf</a><br>
+	<a href="files/learning/low_tech_hacking-street_smarts_for_security_professionals.pdf">low_tech_hacking-street_smarts_for_security_professionals.pdf</a><br>
+	<a href="files/learning/lteinspector.pdf">lteinspector.pdf</a><br>
+	<a href="files/learning/malware_comes_of_age_the_arrival_of_the_true_computer_parasite.pdf">malware_comes_of_age_the_arrival_of_the_true_computer_parasite.pdf</a><br>
+	<a href="files/learning/malware_in_popular_networks.pdf">malware_in_popular_networks.pdf</a><br>
+	<a href="files/learning/malware_pattern_scanning_schemes_secure_against_black-box_analysis.pdf">malware_pattern_scanning_schemes_secure_against_black-box_analysis.pdf</a><br>
+	<a href="files/learning/malware_phylogeny_generation_using_permutations_of_code.pdf">malware_phylogeny_generation_using_permutations_of_code.pdf</a><br>
+	<a href="files/learning/malware_viruses_and_log_visualisation.pdf">malware_viruses_and_log_visualisation.pdf</a><br>
+	<a href="files/learning/man-and-his-symbols-carl-jung.pdf">man-and-his-symbols-carl-jung.pdf</a><br>
+	<a href="files/learning/mark_russinovich-zero_day.pdf">mark_russinovich-zero_day.pdf</a><br>
+	<a href="files/learning/masm-61-proguide.pdf">masm-61-proguide.pdf</a><br>
+	<a href="files/learning/mastering_apache_cassandra.pdf">mastering_apache_cassandra.pdf</a><br>
+	<a href="files/learning/mastering_embedded_linux_programming.pdf">mastering_embedded_linux_programming.pdf</a><br>
+	<a href="files/learning/mastering_git.pdf">mastering_git.pdf</a><br>
+	<a href="files/learning/mastering_hadoop.pdf">mastering_hadoop.pdf</a><br>
+	<a href="files/learning/masteringkalilinuxforadvancedpenetrationtesting_ebook.pdf">masteringkalilinuxforadvancedpenetrationtesting_ebook.pdf</a><br>
+	<a href="files/learning/mastering_kubernetes.pdf">mastering_kubernetes.pdf</a><br>
+	<a href="files/learning/masteringpfsense_ebook.pdf">masteringpfsense_ebook.pdf</a><br>
+	<a href="files/learning/measuring_virtual_machine_detection_in_malware_using_dsd_tracer.pdf">measuring_virtual_machine_detection_in_malware_using_dsd_tracer.pdf</a><br>
+	<a href="files/learning/metasploitforbeginners_ebook.pdf">metasploitforbeginners_ebook.pdf</a><br>
+	<a href="files/learning/metasploitpenetrationtestingcookbook_ebook.pdf">metasploitpenetrationtestingcookbook_ebook.pdf</a><br>
+	<a href="files/learning/metasploit-the_penetration_testers_guide.pdf">metasploit-the_penetration_testers_guide.pdf</a><br>
+	<a href="files/learning/misusing_kademlia_protocol_to_perform_ddos.pdf">misusing_kademlia_protocol_to_perform_ddos.pdf</a><br>
+	<a href="files/learning/movinghadooptothecloud.pdf">movinghadooptothecloud.pdf</a><br>
+	<a href="files/learning/ncc_group-abusing_privileged_linux_containers.pdf">ncc_group-abusing_privileged_linux_containers.pdf</a><br>
+	<a href="files/learning/ncc_group-understanding_hardening_linux_containers-1-1.pdf">ncc_group-understanding_hardening_linux_containers-1-1.pdf</a><br>
+	<a href="files/learning/networkanalysisusingwireshark2cookbook_ebook.pdf">networkanalysisusingwireshark2cookbook_ebook.pdf</a><br>
+	<a href="files/learning/new_malware_distribution_methods_threaten_signature-based_av.pdf">new_malware_distribution_methods_threaten_signature-based_av.pdf</a><br>
+	<a href="files/learning/new_thoughts_in_ring3_nt_rootkit.pdf">new_thoughts_in_ring3_nt_rootkit.pdf</a><br>
+	<a href="files/learning/nintendo_power_issue_049_june_1993.pdf">nintendo_power_issue_049_june_1993.pdf</a><br>
+	<a href="files/learning/nintendo_power_issue_089_october_1996.pdf">nintendo_power_issue_089_october_1996.pdf</a><br>
+	<a href="files/learning/nios2_cpu_instruction_set.pdf">nios2_cpu_instruction_set.pdf</a><br>
+	<a href="files/learning/nmap_network_discovery_iii.pdf">nmap_network_discovery_iii.pdf</a><br>
+	<a href="files/learning/nmap_networkexplorationandsecurityauditingcookbook_ebook.pdf">nmap_networkexplorationandsecurityauditingcookbook_ebook.pdf</a><br>
+	<a href="files/learning/nmap-scanning_the_internet.pdf">nmap-scanning_the_internet.pdf</a><br>
+	<a href="files/learning/non-executable_stack_arm_exploitation_def18.pdf">non-executable_stack_arm_exploitation_def18.pdf</a><br>
+	<a href="files/learning/normalizing_metamorphic_malware_using_term_rewriting.pdf">normalizing_metamorphic_malware_using_term_rewriting.pdf</a><br>
+	<a href="files/learning/nosqldbs.pdf">nosqldbs.pdf</a><br>
+	<a href="files/learning/nsm_and_intrusion_detection_ids_guide.pdf">nsm_and_intrusion_detection_ids_guide.pdf</a><br>
+	<a href="files/learning/nx_bypass_2005.pdf">nx_bypass_2005.pdf</a><br>
+	<a href="files/learning/osint_handbook_june-2018_final.pdf">osint_handbook_june-2018_final.pdf</a><br>
+	<a href="files/learning/our_docker_app_got_hacked_now_what.pdf">our_docker_app_got_hacked_now_what.pdf</a><br>
+	<a href="files/learning/owasp_10_most_common_backdoors.pdf">owasp_10_most_common_backdoors.pdf</a><br>
+	<a href="files/learning/owasp_top_10-2017_(en).pdf">owasp_top_10-2017_(en).pdf</a><br>
+	<a href="files/learning/password_reset_cisco_2600.pdf">password_reset_cisco_2600.pdf</a><br>
+	<a href="files/learning/pawns-in-the-game.pdf">pawns-in-the-game.pdf</a><br>
+	<a href="files/learning/pc_assembly_language_2002.pdf">pc_assembly_language_2002.pdf</a><br>
+	<a href="files/learning/pc_assembly_language_2005.pdf">pc_assembly_language_2005.pdf</a><br>
+	<a href="files/learning/penetration_testers_open_source_toolkit.pdf">penetration_testers_open_source_toolkit.pdf</a><br>
+	<a href="files/learning/penetration_testing-a_hands-on_introduction.pdf">penetration_testing-a_hands-on_introduction.pdf</a><br>
+	<a href="files/learning/penetration_testing_with_backbox.pdf">penetration_testing_with_backbox.pdf</a><br>
+	<a href="files/learning/penetration_testing_with_kali_linux_2014.pdf">penetration_testing_with_kali_linux_2014.pdf</a><br>
+	<a href="files/learning/penetration_testing_with_the_bash_shell_2014.pdf">penetration_testing_with_the_bash_shell_2014.pdf</a><br>
+	<a href="files/learning/phishing_exposed.pdf">phishing_exposed.pdf</a><br>
+	<a href="files/learning/poc_gtfo_bible_vol_1.pdf">poc_gtfo_bible_vol_1.pdf</a><br>
+	<a href="files/learning/pocorgtfo17.pdf">pocorgtfo17.pdf</a><br>
+	<a href="files/learning/polymorphic_and_metamorphic_malware_detection.pdf">polymorphic_and_metamorphic_malware_detection.pdf</a><br>
+	<a href="files/learning/polymorphic_detonation__none.pdf">polymorphic_detonation__none.pdf</a><br>
+	<a href="files/learning/polymorphic_virus_detection_technology.pdf">polymorphic_virus_detection_technology.pdf</a><br>
+	<a href="files/learning/polymorphic_worm_detection_using_structural_information_of_executables.pdf">polymorphic_worm_detection_using_structural_information_of_executables.pdf</a><br>
+	<a href="files/learning/polymorphism_in_java_methods_and_polymorphic_algorithms_applied_to_computer_games_kindle_edition.pdf">polymorphism_in_java_methods_and_polymorphic_algorithms_applied_to_computer_games_kindle_edition.pdf</a><br>
+	<a href="files/learning/postgresql9_high_availability_cookbook.pdf">postgresql9_high_availability_cookbook.pdf</a><br>
+	<a href="files/learning/practicalbinary.pdf">practicalbinary.pdf</a><br>
+	<a href="files/learning/practicalcyberintelligence_ebook.pdf">practicalcyberintelligence_ebook.pdf</a><br>
+	<a href="files/learning/practical_devops.pdf">practical_devops.pdf</a><br>
+	<a href="files/learning/practical_digital_forensics.pdf">practical_digital_forensics.pdf</a><br>
+	<a href="files/learning/practical_forensic_imaging.pdf">practical_forensic_imaging.pdf</a><br>
+	<a href="files/learning/practical_iot_security.pdf">practical_iot_security.pdf</a><br>
+	<a href="files/learning/practical_malware_analysis.pdf">practical_malware_analysis.pdf</a><br>
+	<a href="files/learning/practicalmobileforensics_ebook.pdf">practicalmobileforensics_ebook.pdf</a><br>
+	<a href="files/learning/practicalmonitoring.pdf">practicalmonitoring.pdf</a><br>
+	<a href="files/learning/practical_packet_analysis_3rd_ed.pdf">practical_packet_analysis_3rd_ed.pdf</a><br>
+	<a href="files/learning/practical_reverse_engineering-bruce_dang.pdf">practical_reverse_engineering-bruce_dang.pdf</a><br>
+	<a href="files/learning/pratical_cassandra.pdf">pratical_cassandra.pdf</a><br>
+	<a href="files/learning/process_injection_with_gdb.pdf">process_injection_with_gdb.pdf</a><br>
+	<a href="files/learning/professional_penetration_testing-creating_and_operating_a_formal_hacking_lab.pdf">professional_penetration_testing-creating_and_operating_a_formal_hacking_lab.pdf</a><br>
+	<a href="files/learning/programming_rust.epub">programming_rust.epub</a><br>
+	<a href="files/learning/prometheus_upandrunning.pdf">prometheus_upandrunning.pdf</a><br>
+	<a href="files/learning/radare2book.pdf">radare2book.pdf</a><br>
+	<a href="files/learning/raspberry_pi_by_example.pdf">raspberry_pi_by_example.pdf</a><br>
+	<a href="files/learning/raspberry_pi_home_automation_with_arduino.pdf">raspberry_pi_home_automation_with_arduino.pdf</a><br>
+	<a href="files/learning/ravenxe_hspa_ug_includes_h2295_e_rev4.pdf">ravenxe_hspa_ug_includes_h2295_e_rev4.pdf</a><br>
+	<a href="files/learning/raven_xe_verizon_userguide_v4.pdf">raven_xe_verizon_userguide_v4.pdf</a><br>
+	<a href="files/learning/red_team_field_manual_with_bonus_content.pdf">red_team_field_manual_with_bonus_content.pdf</a><br>
+	<a href="files/learning/report_volume5.pdf">report_volume5.pdf</a><br>
+	<a href="files/learning/retrogame_archeology.pdf">retrogame_archeology.pdf</a><br>
+	<a href="files/learning/return_oriented_programming_without_returns-x86.pdf">return_oriented_programming_without_returns-x86.pdf</a><br>
+	<a href="files/learning/reverse_engineering_for_beginners-dennis_yurichev.pdf">reverse_engineering_for_beginners-dennis_yurichev.pdf</a><br>
+	<a href="files/learning/reverse-engineering-malicious-code-tips.pdf">reverse-engineering-malicious-code-tips.pdf</a><br>
+	<a href="files/learning/reversing-secrets_of_reverse_engineering.pdf">reversing-secrets_of_reverse_engineering.pdf</a><br>
+	<a href="files/learning/rhel_network_performance_tuning.pdf">rhel_network_performance_tuning.pdf</a><br>
+	<a href="files/learning/rockwell_microelectronic_device_data_catalog_(may,_1979).pdf">rockwell_microelectronic_device_data_catalog_(may,_1979).pdf</a><br>
+	<a href="files/learning/ropdefender-a_detection_tool_to_defend_against_rop_attacks.pdf">ropdefender-a_detection_tool_to_defend_against_rop_attacks.pdf</a><br>
+	<a href="files/learning/router_setup_-_titan_wiki_2018-06-05.pdf">router_setup_-_titan_wiki_2018-06-05.pdf</a><br>
+	<a href="files/learning/router_setup_-_titan_wiki.pdf">router_setup_-_titan_wiki.pdf</a><br>
+	<a href="files/learning/router_tutorial_2018-03-22.pdf">router_tutorial_2018-03-22.pdf</a><br>
+	<a href="files/learning/rpm_building_practice_10082013.pdf">rpm_building_practice_10082013.pdf</a><br>
+	<a href="files/learning/rtfm-red_team_field_manual.pdf">rtfm-red_team_field_manual.pdf</a><br>
+	<a href="files/learning/sans_scapycheatsheet_v0.2.pdf">sans_scapycheatsheet_v0.2.pdf</a><br>
+	<a href="files/learning/saucon_fmcsa_eld_user_manual.pdf">saucon_fmcsa_eld_user_manual.pdf</a><br>
+	<a href="files/learning/screen.cheat.sheet.pdf">screen.cheat.sheet.pdf</a><br>
+	<a href="files/learning/sec16_paper_tramer.pdf">sec16_paper_tramer.pdf</a><br>
+	<a href="files/learning/secret-service-westbridge-emails.pdf">secret-service-westbridge-emails.pdf</a><br>
+	<a href="files/learning/seekingsre.pdf">seekingsre.pdf</a><br>
+	<a href="files/learning/seh_exploitation.pdf">seh_exploitation.pdf</a><br>
+	<a href="files/learning/shellcoders_handbook_2nd_edition.pdf">shellcoders_handbook_2nd_edition.pdf</a><br>
+	<a href="files/learning/silent-bob-is-silent.pdf">silent-bob-is-silent.pdf</a><br>
+	<a href="files/learning/skyline_dms.pdf">skyline_dms.pdf</a><br>
+	<a href="files/learning/smashing_the_stack_for_fun_and_profit.pdf">smashing_the_stack_for_fun_and_profit.pdf</a><br>
+	<a href="files/learning/smashing_the_stack_in_2010.pdf">smashing_the_stack_in_2010.pdf</a><br>
+	<a href="files/learning/snapcode_guidelines.pdf">snapcode_guidelines.pdf</a><br>
+	<a href="files/learning/social_encryption.pdf">social_encryption.pdf</a><br>
+	<a href="files/learning/social_engineering_toolkit_user_manual.pdf">social_engineering_toolkit_user_manual.pdf</a><br>
+	<a href="files/learning/spo1422_persistent_memory_in_operation.pdf">spo1422_persistent_memory_in_operation.pdf</a><br>
+	<a href="files/learning/sql_injection_attacks_and_defense.pdf">sql_injection_attacks_and_defense.pdf</a><br>
+	<a href="files/learning/ssl_poodle_attacks.pdf">ssl_poodle_attacks.pdf</a><br>
+	<a href="files/learning/stack_based_buffer_overflows_and_protection_mechanisms.pdf">stack_based_buffer_overflows_and_protection_mechanisms.pdf</a><br>
+	<a href="files/learning/stealing_the_network-how_to_own_a_continent.pdf">stealing_the_network-how_to_own_a_continent.pdf</a><br>
+	<a href="files/learning/stealing_the_network-how_to_own_the_box.pdf">stealing_the_network-how_to_own_the_box.pdf</a><br>
+	<a href="files/learning/stuides_on_astral_magic_in_early_jewish_thought.pdf">stuides_on_astral_magic_in_early_jewish_thought.pdf</a><br>
+	<a href="files/learning/sybil_attacks_as_a_mitigation_strategy_against_the_storm_botnet_9p.pdf">sybil_attacks_as_a_mitigation_strategy_against_the_storm_botnet_9p.pdf</a><br>
+	<a href="files/learning/tcp4dummies.pdf">tcp4dummies.pdf</a><br>
+	<a href="files/learning/the_art_of_256byte_intros.pdf">the_art_of_256byte_intros.pdf</a><br>
+	<a href="files/learning/the_art_of_computer_virus_research_and_defense.pdf">the_art_of_computer_virus_research_and_defense.pdf</a><br>
+	<a href="files/learning/the_art_of_debugging_with_gdb_ddd_and_eclipse.pdf">the_art_of_debugging_with_gdb_ddd_and_eclipse.pdf</a><br>
+	<a href="files/learning/the_art_of_human_hacking.pdf">the_art_of_human_hacking.pdf</a><br>
+	<a href="files/learning/the_art_of_memory_forensics.pdf">the_art_of_memory_forensics.pdf</a><br>
+	<a href="files/learning/the_basics_of_hacking_and_penetration_testing.pdf">the_basics_of_hacking_and_penetration_testing.pdf</a><br>
+	<a href="files/learning/the_basics_of_web_hacking-syngress.pdf">the_basics_of_web_hacking-syngress.pdf</a><br>
+	<a href="files/learning/the_browser_hackers_handbook.pdf">the_browser_hackers_handbook.pdf</a><br>
+	<a href="files/learning/the_car_hackers_handbook.pdf">the_car_hackers_handbook.pdf</a><br>
+	<a href="files/learning/the_database_hackers_handbook.pdf">the_database_hackers_handbook.pdf</a><br>
+	<a href="files/learning/the_endgame_guide_to_threat_hunting.pdf">the_endgame_guide_to_threat_hunting.pdf</a><br>
+	<a href="files/learning/the_future_of_bot_worms.pdf">the_future_of_bot_worms.pdf</a><br>
+	<a href="files/learning/theghidrabook.pdf">theghidrabook.pdf</a><br>
+	<a href="files/learning/the_hacker_playbook.pdf">the_hacker_playbook.pdf</a><br>
+	<a href="files/learning/the-hardware-hacker-andrew-huang.pdf">the-hardware-hacker-andrew-huang.pdf</a><br>
+	<a href="files/learning/the_ida_pro_book_2008.pdf">the_ida_pro_book_2008.pdf</a><br>
+	<a href="files/learning/the_ida_pro_book_2nd_ed.pdf">the_ida_pro_book_2nd_ed.pdf</a><br>
+	<a href="files/learning/thelinuxcommandline.pdf">thelinuxcommandline.pdf</a><br>
+	<a href="files/learning/the_linux_programming_interface.pdf">the_linux_programming_interface.pdf</a><br>
+	<a href="files/learning/the_return_of_qbot_wp_v2_mar16.pdf">the_return_of_qbot_wp_v2_mar16.pdf</a><br>
+	<a href="files/learning/the-shadow-brokers-unitedrake-manual.pdf">the-shadow-brokers-unitedrake-manual.pdf</a><br>
+	<a href="files/learning/thesitereliabilityworkbook.pdf">thesitereliabilityworkbook.pdf</a><br>
+	<a href="files/learning/the_threat_to_identity_from_new_and_unknown_malware.pdf">the_threat_to_identity_from_new_and_unknown_malware.pdf</a><br>
+	<a href="files/learning/the_unix_system_users_manual_system_v_release_2_1986.pdf">the_unix_system_users_manual_system_v_release_2_1986.pdf</a><br>
+	<a href="files/learning/thoughts_about_cross-view_based_rootkit_detection.pdf">thoughts_about_cross-view_based_rootkit_detection.pdf</a><br>
+	<a href="files/learning/thunderbench-linker-script-guide.pdf">thunderbench-linker-script-guide.pdf</a><br>
+	<a href="files/learning/timeless-timing-attack_usenix2020.pdf">timeless-timing-attack_usenix2020.pdf</a><br>
+	<a href="files/learning/towards_automated_defense_from_rootkit_attacks.pdf">towards_automated_defense_from_rootkit_attacks.pdf</a><br>
+	<a href="files/learning/towards_systematic_evaluation_of_the_evadability_of_botbotnet_detection_methods.pdf">towards_systematic_evaluation_of_the_evadability_of_botbotnet_detection_methods.pdf</a><br>
+	<a href="files/learning/ttl_cookbook.pdf">ttl_cookbook.pdf</a><br>
+	<a href="files/learning/unauthorised_access-physical_penetration_testing_for_it_security_teams.pdf">unauthorised_access-physical_penetration_testing_for_it_security_teams.pdf</a><br>
+	<a href="files/learning/understanding_and_managing_polymorphic_viruses.pdf">understanding_and_managing_polymorphic_viruses.pdf</a><br>
+	<a href="files/learning/understanding_seh_exploitation.pdf">understanding_seh_exploitation.pdf</a><br>
+	<a href="files/learning/understanding_the_low_fragmentation_heap_bh10.pdf">understanding_the_low_fragmentation_heap_bh10.pdf</a><br>
+	<a href="files/learning/unix_assembly_code_development_for_vulnerabilities.pdf">unix_assembly_code_development_for_vulnerabilities.pdf</a><br>
+	<a href="files/learning/urgent11_technical_white_paper.pdf">urgent11_technical_white_paper.pdf</a><br>
+	<a href="files/learning/us-13-butterworth-bios-security-slides.pdf">us-13-butterworth-bios-security-slides.pdf</a><br>
+	<a href="files/learning/us-15-kettle-server-side-template-injection-rce-for-the-modern-web-app-wp.pdf">us-15-kettle-server-side-template-injection-rce-for-the-modern-web-app-wp.pdf</a><br>
+	<a href="files/learning/using_engine_signature_to_detect_metamorphic_malware.pdf">using_engine_signature_to_detect_metamorphic_malware.pdf</a><br>
+	<a href="files/learning/using_malware_to_improve_software_quality_and_security.pdf">using_malware_to_improve_software_quality_and_security.pdf</a><br>
+	<a href="files/learning/using_spatio-temporal_information_in_api_calls_with_machine_learning_algorithms_for_malware_detectio.pdf">using_spatio-temporal_information_in_api_calls_with_machine_learning_algorithms_for_malware_detectio.pdf</a><br>
+	<a href="files/learning/veeder_root_serial_interface_manual.pdf">veeder_root_serial_interface_manual.pdf</a><br>
+	<a href="files/learning/veeder_root_tls-3xx_console.pdf">veeder_root_tls-3xx_console.pdf</a><br>
+	<a href="files/learning/violent_python_-_a_cookbook_for_hackers_forensic_analysts_penetration_testers_and_security_engineers.pdf">violent_python_-_a_cookbook_for_hackers_forensic_analysts_penetration_testers_and_security_engineers.pdf</a><br>
+	<a href="files/learning/vmdetection_localdatatable.pdf">vmdetection_localdatatable.pdf</a><br>
+	<a href="files/learning/vx_reversing_ii_sasser.b.pdf">vx_reversing_ii_sasser.b.pdf</a><br>
+	<a href="files/learning/vx_reversing_i_the_basics.pdf">vx_reversing_i_the_basics.pdf</a><br>
+	<a href="files/learning/vx-trading.pdf">vx-trading.pdf</a><br>
+	<a href="files/learning/wctf2019-gtf-slides.pdf">wctf2019-gtf-slides.pdf</a><br>
+	<a href="files/learning/web_application_file_upload_vulnerabilities.pdf">web_application_file_upload_vulnerabilities.pdf</a><br>
+	<a href="files/learning/web_application_hackers_handbook.pdf">web_application_hackers_handbook.pdf</a><br>
+	<a href="files/learning/web_application_security-a_beginners_guide.pdf">web_application_security-a_beginners_guide.pdf</a><br>
+	<a href="files/learning/webpenetrationtestingwithkalilinux_ebook.pdf">webpenetrationtestingwithkalilinux_ebook.pdf</a><br>
+	<a href="files/learning/web_penetration_testing_with_kali_linux.pdf">web_penetration_testing_with_kali_linux.pdf</a><br>
+	<a href="files/learning/when_malware_meets_rootkits.pdf">when_malware_meets_rootkits.pdf</a><br>
+	<a href="files/learning/wickedcoolshellscripts.pdf">wickedcoolshellscripts.pdf</a><br>
+	<a href="files/learning/wifi_predicting_decrypting_abusing_wpa2_keys.pdf">wifi_predicting_decrypting_abusing_wpa2_keys.pdf</a><br>
+	<a href="files/learning/woot20-paper36-slides-fioraldi.pdf">woot20-paper36-slides-fioraldi.pdf</a><br>
+	<a href="files/learning/worm-the_first_digital_world_war.pdf">worm-the_first_digital_world_war.pdf</a><br>
+	<a href="files/learning/writing-jit-spray-shellcode.pdf">writing-jit-spray-shellcode.pdf</a><br>
+	<a href="files/learning/x64_linux_abi.pdf">x64_linux_abi.pdf</a><br>
+	<a href="files/learning/x86_assembly_language_and_c_fundamentals.pdf">x86_assembly_language_and_c_fundamentals.pdf</a><br>
+	<a href="files/learning/x86_disassembly-wikibook.pdf">x86_disassembly-wikibook.pdf</a><br>
+	<a href="files/learning/x86_harmful.pdf">x86_harmful.pdf</a><br>
+	<a href="files/learning/x86_instruction_listings.pdf">x86_instruction_listings.pdf</a><br>
+	<a href="files/learning/x86_win32_reverse_engineering_cheat_sheet.pdf">x86_win32_reverse_engineering_cheat_sheet.pdf</a><br>
+	<a href="files/learning/xml-schema_dtd_and_entity_attacks.pdf">xml-schema_dtd_and_entity_attacks.pdf</a><br>
+	<a href="files/learning/xss_attacks.pdf">xss_attacks.pdf</a><br>
+	<a href="files/learning/zeusvm_bits_and_pieces.pdf">zeusvm_bits_and_pieces.pdf</a><br>
+</div>
+</body>
+</html>

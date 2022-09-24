@@ -1,0 +1,1 @@
+window.nojscode=!0
