@@ -1,3 +1,3 @@
 # Collection of visit sites and etc.
-Коллекция сайтов-визиток и не только для ваших нужд. Со временем коллекция будет пополняться, так что советую старнуть репозиторий :)
+A collection of business card sites and not only for your needs. Over time, the collection will be replenished, so I advise you to star the repository :)
 >WEB: https://llyxa05.github.io/Collection-of-visit-sites/index.html
